@@ -1,0 +1,35 @@
+{
+  "name": "multi-auto-agent-ts",
+  "version": "1.0.0",
+  "description": "TypeScript implementation of the full reference agent",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node src/presentation/index.tsx",
+    "start:node": "node dist/presentation/index.js",
+    "build": "tsc",
+    "lint": "eslint src/**/*.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.36.3",
+    "cli-boxes": "^4.0.1",
+    "commander": "^14.0.3",
+    "dotenv": "^16.4.7",
+    "ink": "^3.2.0",
+    "ink-spinner": "^4.0.3",
+    "ink-text-input": "^4.0.3",
+    "react": "^18.3.1",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/ink-text-input": "^2.0.5",
+    "@types/node": "^22.13.4",
+    "@types/react": "^18.3.28",
+    "@types/uuid": "^10.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
