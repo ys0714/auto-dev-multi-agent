@@ -1,0 +1,10 @@
+{
+  "team_name": "default",
+  "members": [
+    {
+      "name": "file_reader",
+      "role": "\u6587\u4ef6\u8bfb\u53d6\u52a9\u624b",
+      "status": "idle"
+    }
+  ]
+}
