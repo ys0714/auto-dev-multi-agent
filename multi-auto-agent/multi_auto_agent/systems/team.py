@@ -6,6 +6,7 @@ from ..tools.base import run_bash, run_read, run_write, run_edit
 from .messaging import MessageBus
 from .tasks import TaskManager
 
+class TeammateManager:
     def __init__(self, bus: MessageBus, task_mgr: TaskManager, plan_registry: dict = None):
         TEAM_DIR.mkdir(exist_ok=True)
         self.bus = bus

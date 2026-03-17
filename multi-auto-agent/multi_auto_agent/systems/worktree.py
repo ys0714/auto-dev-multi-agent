@@ -3,6 +3,7 @@ import re
 import subprocess
 import time
 from pathlib import Path
+from typing import Optional
 from ..config import REPO_ROOT
 
 class EventBus:
@@ -12,7 +13,13 @@ class EventBus:
         if not self.path.exists():
             self.path.write_text("")
 
-    def emit(self, event: str, task: dict | None = None, worktree: dict | None = None, error: str | None = None):
+    def emit(
+        self,
+        event: str,
+        task: Optional[dict] = None,
+        worktree: Optional[dict] = None,
+        error: Optional[str] = None,
+    ):
         payload = {
             "event": event,
             "ts": time.time(),
@@ -82,7 +89,7 @@ class WorktreeManager:
     def _save_index(self, data: dict):
         self.index_path.write_text(json.dumps(data, indent=2))
 
-    def _find(self, name: str) -> dict | None:
+    def _find(self, name: str) -> Optional[dict]:
         idx = self._load_index()
         for wt in idx.get("worktrees", []):
             if wt.get("name") == name:

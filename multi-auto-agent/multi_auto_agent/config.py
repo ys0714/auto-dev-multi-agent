@@ -2,6 +2,7 @@ import os
 import uuid
 import subprocess
 from pathlib import Path
+from typing import Optional
 from dotenv import load_dotenv
 from anthropic import Anthropic
 
@@ -11,7 +12,7 @@ if os.getenv("ANTHROPIC_BASE_URL"):
 
 WORKDIR = Path.cwd()
 
-def detect_repo_root(cwd: Path) -> Path | None:
+def detect_repo_root(cwd: Path) -> Optional[Path]:
     try:
         r = subprocess.run(
             ["git", "rev-parse", "--show-toplevel"],

@@ -1,12 +1,14 @@
 import json
-from .config import SKILLS_DIR
+from .config import SKILLS_DIR, REPO_ROOT
 from .systems.todo import TodoManager
 from .systems.skills import SkillLoader
 from .systems.tasks import TaskManager
 from .systems.background import BackgroundManager
 from .systems.messaging import MessageBus
 from .systems.worktree import WorktreeManager, EventBus
-from .config import REPO_ROOT
+from .systems.team import TeammateManager
+from .systems.compression import auto_compact
+from .agent.core import Agent
 
 def main():
     # Initialize shared state
@@ -59,6 +61,26 @@ def main():
             
         history.append({"role": "user", "content": query})
         agent.loop(history)
+
+        # Print the latest assistant reply (if any)
+        last_assistant = None
+        for msg in reversed(history):
+            if isinstance(msg, dict) and msg.get("role") == "assistant":
+                last_assistant = msg
+                break
+        if last_assistant is not None:
+            content = last_assistant.get("content", "")
+            # anthropic SDK returns a list of content blocks; extract text fields if present
+            if isinstance(content, list):
+                parts = []
+                for block in content:
+                    text = getattr(block, "text", None) or getattr(block, "content", None)
+                    if text:
+                        parts.append(text)
+                to_print = "".join(parts) if parts else str(content)
+            else:
+                to_print = str(content)
+            print(to_print)
         print()
 
 if __name__ == "__main__":
